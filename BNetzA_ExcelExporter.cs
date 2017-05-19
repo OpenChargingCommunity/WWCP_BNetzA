@@ -76,18 +76,18 @@ namespace WWCP_BNetzA
                 foreach (var group in CIT_Operator_Prod.ChargingStationGroups)
                 {
 
-                    if (group.Name.FirstText == "chargeIT"             ||
-                        group.Name.FirstText == "chargeIT Messe"       ||
-                        group.Name.FirstText == "Belectric Italia srl" ||
-                        group.Name.FirstText == "Belectric France"     ||
-                        group.Name.FirstText == "chargeIT Lager"       ||
-                        group.Name.FirstText == "solid GmbH"           ||
-                        group.Name.FirstText == "Ladeverbund Franken+" ||
-                        group.Name.FirstText == "Hubject GmbH")
+                    if (group.Name.FirstText() == "chargeIT"             ||
+                        group.Name.FirstText() == "chargeIT Messe"       ||
+                        group.Name.FirstText() == "Belectric Italia srl" ||
+                        group.Name.FirstText() == "Belectric France"     ||
+                        group.Name.FirstText() == "chargeIT Lager"       ||
+                        group.Name.FirstText() == "solid GmbH"           ||
+                        group.Name.FirstText() == "Ladeverbund Franken+" ||
+                        group.Name.FirstText() == "Hubject GmbH")
                         continue;
 
                     row++;
-                    ExcelWorksheet.Cells[row, 2].Value = group.Name.FirstText;
+                    ExcelWorksheet.Cells[row, 2].Value = group.Name.FirstText();
 
                 }
 
@@ -192,33 +192,33 @@ namespace WWCP_BNetzA
 
                     if (station.DataSource != CIT_Live_ImporterId ||
 
-                        station.ChargingPool.Description.FirstText.Contains("Messestandort") ||
-                        station.ChargingPool.Description.FirstText.Contains("Teststandort")  ||
-                        station.ChargingPool.Description.FirstText.Contains("Messebox")      ||
-                        station.ChargingPool.Description.FirstText.Contains("Testbox")       ||
+                        station.ChargingPool.Description.FirstText().Contains("Messestandort") ||
+                        station.ChargingPool.Description.FirstText().Contains("Teststandort")  ||
+                        station.ChargingPool.Description.FirstText().Contains("Messebox")      ||
+                        station.ChargingPool.Description.FirstText().Contains("Testbox")       ||
 
-                        station.             Description.FirstText.Contains("Messestandort") ||
-                        station.             Description.FirstText.Contains("Teststandort")  ||
-                        station.             Description.FirstText.Contains("Messebox")      ||
-                        station.             Description.FirstText.Contains("Testbox")       ||
+                        station.             Description.FirstText().Contains("Messestandort") ||
+                        station.             Description.FirstText().Contains("Teststandort")  ||
+                        station.             Description.FirstText().Contains("Messebox")      ||
+                        station.             Description.FirstText().Contains("Testbox")       ||
 
-                        station.Brand.Name.FirstText == "chargeIT Messe"       ||
-                        station.Brand.Name.FirstText == "Belectric Italia srl" ||
-                        station.Brand.Name.FirstText == "Belectric France"     ||
-                        station.Brand.Name.FirstText == "chargeIT Lager"       ||
-                        station.Brand.Name.FirstText == "solid GmbH"           ||
-                        station.Brand.Name.FirstText == "Ladeverbund Franken+" ||
-                        station.Brand.Name.FirstText == "Hubject GmbH")
+                        station.Brand.Name.FirstText() == "chargeIT Messe"       ||
+                        station.Brand.Name.FirstText() == "Belectric Italia srl" ||
+                        station.Brand.Name.FirstText() == "Belectric France"     ||
+                        station.Brand.Name.FirstText() == "chargeIT Lager"       ||
+                        station.Brand.Name.FirstText() == "solid GmbH"           ||
+                        station.Brand.Name.FirstText() == "Ladeverbund Franken+" ||
+                        station.Brand.Name.FirstText() == "Hubject GmbH")
 
                         continue;
 
                     row++;
 
                     ExcelWorksheet.Cells[row,  1].Value = Today;//.Day + ". " + Today.Month + ". " + Today.Year;
-                    ExcelWorksheet.Cells[row,  2].Value = station.Brand?.Name?.FirstText;
+                    ExcelWorksheet.Cells[row,  2].Value = station.Brand?.Name?.FirstText();
                     ExcelWorksheet.Cells[row,  4].Value = station.Id.ToString();
                     ExcelWorksheet.Cells[row,  7].Value = String.Concat(station.Address.Street,     " ", station.Address.HouseNumber);
-                    ExcelWorksheet.Cells[row,  8].Value = String.Concat(station.Address.PostalCode, " ", station.Address.City.FirstText);
+                    ExcelWorksheet.Cells[row,  8].Value = String.Concat(station.Address.PostalCode, " ", station.Address.City.FirstText());
                     ExcelWorksheet.Cells[row,  9].Value = station.GeoLocation.Value.Longitude.Value;
                     ExcelWorksheet.Cells[row, 10].Value = station.GeoLocation.Value.Latitude. Value;
 
