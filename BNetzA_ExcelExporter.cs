@@ -20,6 +20,7 @@
 using System;
 using System.IO;
 using System.Linq;
+using System.Collections.Generic;
 
 using OfficeOpenXml;
 
@@ -33,20 +34,20 @@ namespace org.GraphDefined.WWCP.BNetzA
     public class BNetzA_ExcelExporter
     {
 
-        public BNetzA_ExcelExporter(RoamingNetwork                  RoamingNetwork,
-                                    ChargingStationOperator         ChargingStationOperator,
-                                    String                          CompanyName,
-                                    Func<String,          Boolean>  IncludeDataSource       = null,
-                                    Func<Brand,           Boolean>  IncludeBrand            = null,
-                                    Func<ChargingStation, Boolean>  IncludeChargingStation  = null,
-                                    String                          Filename                = "BNetzA-Export.xlsx")
+        public BNetzA_ExcelExporter(RoamingNetwork                     RoamingNetwork,
+                                    ChargingStationOperator            ChargingStationOperator,
+                                    String                             CompanyName,
+                                    Func<String,             Boolean>  IncludeDataSource       = null,
+                                    Func<IEnumerable<Brand>, Boolean>  IncludeBrands            = null,
+                                    Func<ChargingStation,    Boolean>  IncludeChargingStation  = null,
+                                    String                             Filename                = "BNetzA-Export.xlsx")
         {
 
             if (IncludeDataSource      == null)
                 IncludeDataSource      = _ => true;
 
-            if (IncludeBrand           == null)
-                IncludeBrand           = _ => true;
+            if (IncludeBrands           == null)
+                IncludeBrands           = _ => true;
 
             if (IncludeChargingStation == null)
                 IncludeChargingStation = _ => true;
@@ -108,14 +109,15 @@ namespace org.GraphDefined.WWCP.BNetzA
                 var a = ChargingStationOperator.Brands.ToArray();
                 var b = ChargingStationOperator.ChargingStationGroups.ToArray();
 
-                foreach (var brand in ChargingStationOperator.Brands.OrderBy(brand => brand.Name.FirstText()))
-                {
-                    if (IncludeBrand(brand))
+                //foreach (var brand in ChargingStationOperator.Brands.OrderBy(brand => brand.Name.FirstText()))
+                //{
+                    if (IncludeBrands(ChargingStationOperator.Brands))
                     {
                         row++;
-                        ExcelWorksheet.Cells[row, 2].Value = brand.Name.FirstText();
+                        ExcelWorksheet.Cells[row, 2].Value = ChargingStationOperator.Brands.SafeSelect(brand => brand.ToString()).AggregateWith(";");
+                                                             //brand.Name.FirstText();
                     }
-                }
+                //}
 
                 row++;
                 row++;
@@ -240,13 +242,13 @@ namespace org.GraphDefined.WWCP.BNetzA
 
                     if (IncludeChargingStation(station)            &&
                         IncludeDataSource     (station.DataSource) &&
-                        IncludeBrand          (station.Brand))
+                        IncludeBrands         (station.Brands))
                     {
 
                         row++;
 
                         ExcelWorksheet.Cells[row,  1].Value = Today;//.Day + ". " + Today.Month + ". " + Today.Year;
-                        ExcelWorksheet.Cells[row,  2].Value = station.Brand?.Name?.FirstText();
+                        ExcelWorksheet.Cells[row,  2].Value = station.Brands.SafeSelect(brand => brand.Name?.FirstText()).AggregateWith(";");
                         ExcelWorksheet.Cells[row,  4].Value = station.Id.ToString();
                         ExcelWorksheet.Cells[row,  7].Value = String.Concat(station.Address.Street,     " ", station.Address.HouseNumber);
                         ExcelWorksheet.Cells[row,  8].Value = String.Concat(station.Address.PostalCode, " ", station.Address.City.FirstText());
