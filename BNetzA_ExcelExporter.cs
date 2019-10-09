@@ -240,13 +240,13 @@ namespace org.GraphDefined.WWCP.BNetzA
 
                     if (IncludeChargingStation(station)            &&
                         IncludeDataSource     (station.DataSource) &&
-                        IncludeBrand          (station.Brand))
+                        station.Brands.Any(brand => IncludeBrand(brand)))
                     {
 
                         row++;
 
                         ExcelWorksheet.Cells[row,  1].Value = Today;//.Day + ". " + Today.Month + ". " + Today.Year;
-                        ExcelWorksheet.Cells[row,  2].Value = station.Brand?.Name?.FirstText();
+                        ExcelWorksheet.Cells[row,  2].Value = station.Brands.Where(brand => IncludeBrand(brand)).Select(st => st?.Name?.FirstText());
                         ExcelWorksheet.Cells[row,  4].Value = station.Id.ToString();
                         ExcelWorksheet.Cells[row,  7].Value = String.Concat(station.Address.Street,     " ", station.Address.HouseNumber);
                         ExcelWorksheet.Cells[row,  8].Value = String.Concat(station.Address.PostalCode, " ", station.Address.City.FirstText());
