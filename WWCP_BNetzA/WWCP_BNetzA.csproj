@@ -23,6 +23,9 @@
     <None Update="Ladesaeulenkarten\Ladesaeulenregister_2022-11.xlsx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="Ladesaeulenregister\Ladesaeulenregister_2022-11.csv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>
