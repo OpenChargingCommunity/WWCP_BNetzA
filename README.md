@@ -2,7 +2,7 @@
 
 Die [Ladesäulendaten](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/E-Mobilitaet/Ladesaeulenkarte/start.html) stammen
 aus dem Ladesäulenregister der [Bundesnetzagentur (BNetzA)](https://www.bundesnetzagentur.de) und stehen unter der
-[Creative Commons Namensnennung 4.0 International Lizenz)](https://creativecommons.org/licenses/by/4.0/deed.de) (CC BY 4.0).
+[Creative Commons Namensnennung 4.0 International Lizenz (CC BY 4.0)](https://creativecommons.org/licenses/by/4.0/deed.de).
 Enthalten sind alle Ladestationen die das Anzeigeverfahren der Bundesnetzagentur vollständig abgeschlossen und einer Veröffentlichung im
 Internet zugestimmt haben. Die Ladesäulenverordnung ermöglicht allerdings keine lückenlose Erfassung der gesamten deutschen Ladeinfrastruktur.
 Die Zahl der öffentlich zugänglichen Ladeeinrichtungen in Deutschland ist daher größer als dieser Datensatz.
